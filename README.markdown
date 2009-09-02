@@ -1,13 +1,15 @@
 Formal
 ======
 
-Writing forms suck, it needs to be more easier, more... formal, formal is a form helper that makes designing forms fun again, Formal gives you the following things:
+Writing forms suck, it needs to be more easier, and more... formal, formal is a form builder/helper/thing that makes designing forms fun again, Formal gives you the following things:
 
 - a sensible stylesheet to work with
 - same conventions that you are used_to like form_for, etc
 - common sense abstractions like wrapping inputs with labels or giving you toggle values
-- doesn't constrain you to a esoteric form building dsl, so you still have the ability to use this with the other standard rails form helpers like text_field, text_area, etc
+- doesn't constrain you to a esoteric form building dsl, so you still have the ability to use this with the other standard rails form helpers like text_field, text_area, etc.
 - some nice view helpers to do things like zebra striping 
+
+**WARNING : I just started this so it's still under intense development, fork or use at your own risk!**
 
 USAGE
 =====
