@@ -1,0 +1,64 @@
+form{
+  width: 90%;
+  padding:1em;
+}
+
+label{
+  clear: both;
+  display: block;
+  margin:5px 0;
+}
+
+label.inline{
+  display: inline;
+}
+
+input.big{
+  font-size: 16px;
+}
+
+input[type="text"], select{
+  margin:5px 0;
+  padding:3px;
+  width: 40%;
+  display: block;
+}
+
+input[type="submit"]{
+  clear: both;
+  display: block;
+  width:auto;
+}
+
+input[type="checkbox"], input[type="radio"]{
+  clear: both;
+}
+
+fieldset{
+  margin:20px 0;
+  clear:both;
+  padding:10px;
+  border:1px solid #ccc;
+}
+
+/* auto clear for modern browsers */
+fieldset:after{ 
+  content: "."; 
+  display: block; 
+  height: 0; 
+  font-size:0; 
+  clear: both; 
+  visibility:hidden; 
+}
+
+/* auto clear for the browser that could... this needs the css_browser_select js script */
+
+legend{
+  margin-top:0 5px;
+}
+
+textarea{
+  width: 60%;
+  margin:5px 0;
+  padding:3px;
+}
