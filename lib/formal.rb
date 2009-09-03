@@ -22,7 +22,6 @@ module FormalBuilder
   def input_for(method, options={})
     options[:class] ||= ""
     content = build_tags(method,options)
-    options[:value] = options[:default] unless options[:value].nil?
     if options[:default].nil?
       return content << @template.text_field(@object_name, method, 
                                                sanitize_opts(options))
@@ -37,7 +36,6 @@ module FormalBuilder
   # 
   def text_area_for(method, options={})
     content = build_tags(method,options)
-    options[:value] = options[:default] unless options[:value].nil?
     if options[:default].nil?
       return content << @template.text_area(@object_name,method,sanitize_opts(options))
     else
@@ -123,8 +121,9 @@ module FormalBuilder
       label_for(method, lbl)
     end
     
-    # gets rid of non html options
+    # gets rid of non html options and sets sensible defaults
     def sanitize_opts(options)
+      options[:value] = options[:default] unless options[:default].nil?
       opts = %w(label hint default)
       opts.each {|o| options.delete o}
       return options
