@@ -22,12 +22,26 @@ module FormalBuilder
   def input_for(method, options={})
     options[:class] ||= ""
     content = build_tags(method,options)
+    options[:value] = options[:default] unless options[:value].nil?
     if options[:default].nil?
       return content << @template.text_field(@object_name, method, 
                                                sanitize_opts(options))
     else
-      options[:value] = options[:default]
-      @template.text_field(@object_name, method, sanitize_opts(options))                                         
+      return @template.text_field(@object_name, method, sanitize_opts(options))                                         
+    end
+  end
+  
+  # EX:
+  # 
+  # f.text_area_for :notes
+  # 
+  def text_area_for(method, options={})
+    content = build_tags(method,options)
+    options[:value] = options[:default] unless options[:value].nil?
+    if options[:default].nil?
+      return content << @template.text_area(@object_name,method,sanitize_opts(options))
+    else
+      return @template.text_area(@object_name, method, sanitize_opts(options))
     end
   end
   
@@ -74,15 +88,6 @@ module FormalBuilder
   # TODO : finish this method 
   def checkboxes_for(method,vals,options={})
     
-  end
-  
-  # EX:
-  # 
-  # f.text_area_for :notes
-  # 
-  def text_area_for(method, options={})
-    content = build_tags(method,options)
-    content << @template.text_area(@object_name,method,sanitize_opts(options))
   end
   
   # EX:
