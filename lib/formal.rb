@@ -7,19 +7,28 @@ module FormalHelper
 end
 
 module FormalBuilder
+  include ActionView::Helpers::TagHelper
   
   # EX : 
   #     
   #    f.input_for :first_name
+  #    f.input_for :first_name, :toggle => "Please enter in your name"
+  #    f.input_for :first_name, :hint => "Enter your first name"
   #    f.input_for :first_name, :label => "My first name"
   #    f.input_for :first_name, :label => {:value => "My first name", :class => "big"}
   #    f.input_for :first_name, :label => {:value => "My first name", 
   #                :class => "big"}, :class => "text_field_class"
   def input_for(method, options={})
-    lbl = setup_label_for(method, options[:label])
-    options.delete :label
-    
-    lbl << @template.text_field(@object_name, method, options)
+    options[:class] ||= ""
+    content = build_tags(method,options)
+    if options[:toggle].nil?
+      return content << @template.text_field(@object_name, method, 
+                                             sanitize_opts(options))
+    else
+      options[:value] = options[:toggle]
+      options[:class] << " big"
+      return @template.text_field(@object_name, method, sanitize_opts(options))
+    end
   end
   
   # EX:
@@ -27,10 +36,8 @@ module FormalBuilder
   #   f.password_for :password
   #   f.password_for :password_confirmation, :label => "Confirm Password"
   def password_for(method,options={})
-    lbl = setup_label_for(method, options[:label])
-    options.delete :label
-    
-    lbl << @template.password_field(@object_name,method,options)
+    content = build_tags(method,options)
+    content << @template.password_field(@object_name,method,sanitize_opts(options))
   end
   
   # EX:
@@ -73,11 +80,9 @@ module FormalBuilder
   # 
   # f.text_area_for :notes
   # 
-  def text_area_for(method, vals, options={})
-    lbl = setup_label_for(method, options[:label])
-    options.delete :label
-    
-    @template.text_area(@object_name,method,options) << lbl
+  def text_area_for(method, options={})
+    content = build_tags(method,options)
+    content << @template.text_area(@object_name,method,sanitize_opts(options))
   end
   
   # EX:
@@ -96,9 +101,28 @@ module FormalBuilder
   end
   
   protected
+    # the common method that will be called to build the preceding tags
+    def build_tags(method, options)
+      content = setup_label_for(method, options[:label]) 
+      content = add_hint_to(options[:hint],content)
+      return content
+    end
     
-    def setup_label_for(method, lbl=@object_name.humanize)
+    def add_hint_to(hint,lbl)
+      return lbl if hint.nil?
+      lbl << content_tag(:span, hint, :class => "hint")
+    end
+    
+    def setup_label_for(method, lbl)
+      lbl ||= method.to_s.humanize
       label_for(method, lbl)
+    end
+    
+    # gets rid of non html options
+    def sanitize_opts(options)
+      opts = %w(label hint)
+      opts.each {|o| options.delete o}
+      return options
     end
 end
 

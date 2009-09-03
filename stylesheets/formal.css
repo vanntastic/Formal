@@ -1,23 +1,31 @@
 form{
   width: 90%;
-  padding:1em;
+  padding:.5em;
 }
 
 label{
   clear: both;
   display: block;
   margin:5px 0;
+  font-weight: medium;
+  font-size: 14px;
+}
+
+span.hint{
+  color:#B2AFA7;
+  font-size: 10px;
 }
 
 label.inline{
   display: inline;
 }
 
-input.big{
+input[type="text"].big, input[type="password"].big{
   font-size: 16px;
+  width: 70%;
 }
 
-input[type="text"], select{
+input[type="text"],input[type="password"], select{
   margin:5px 0;
   padding:3px;
   width: 40%;
@@ -64,4 +72,4 @@ textarea{
 }
 
 /* zebra stripes */
-.alt{background:;}
+.alt{background:#FFEDB8;}
