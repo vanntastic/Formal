@@ -12,7 +12,8 @@ module FormalBuilder
   # EX : 
   #     
   #    f.input_for :first_name
-  #    f.input_for :first_name, :toggle => "Please enter in your name"
+  #    # say you wanted to default your text_field
+  #    f.input_for :first_name, :value => "Enter your first name"
   #    f.input_for :first_name, :hint => "Enter your first name"
   #    f.input_for :first_name, :label => "My first name"
   #    f.input_for :first_name, :label => {:value => "My first name", :class => "big"}
@@ -21,14 +22,8 @@ module FormalBuilder
   def input_for(method, options={})
     options[:class] ||= ""
     content = build_tags(method,options)
-    if options[:toggle].nil?
-      return content << @template.text_field(@object_name, method, 
+    content << @template.text_field(@object_name, method, 
                                              sanitize_opts(options))
-    else
-      options[:value] = options[:toggle]
-      options[:class] << " big"
-      return @template.text_field(@object_name, method, sanitize_opts(options))
-    end
   end
   
   # EX:
