@@ -13,7 +13,7 @@ module FormalBuilder
   #     
   #    f.input_for :first_name
   #    # say you wanted to default your text_field
-  #    f.input_for :first_name, :value => "Enter your first name"
+  #    f.input_for :first_name, :default => "Enter your first name"
   #    f.input_for :first_name, :hint => "Enter your first name"
   #    f.input_for :first_name, :label => "My first name"
   #    f.input_for :first_name, :label => {:value => "My first name", :class => "big"}
@@ -22,8 +22,13 @@ module FormalBuilder
   def input_for(method, options={})
     options[:class] ||= ""
     content = build_tags(method,options)
-    content << @template.text_field(@object_name, method, 
-                                             sanitize_opts(options))
+    if options[:default].nil?
+      return content << @template.text_field(@object_name, method, 
+                                               sanitize_opts(options))
+    else
+      options[:value] = options[:default]
+      @template.text_field(@object_name, method, sanitize_opts(options))                                         
+    end
   end
   
   # EX:
@@ -115,7 +120,7 @@ module FormalBuilder
     
     # gets rid of non html options
     def sanitize_opts(options)
-      opts = %w(label hint)
+      opts = %w(label hint default)
       opts.each {|o| options.delete o}
       return options
     end
