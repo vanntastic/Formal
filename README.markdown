@@ -13,15 +13,32 @@ Writing forms suck, it needs to be more easier, and more... formal, formal is a 
 
 USAGE
 =====
-Examples assume the fields are nested in the following block:
+Examples below assume the fields are nested in block similar to:
 
-    form_for @something do |f|
+    form_for @user do |f|
       # examples here
+    end
+
+Here's a simple example:
+
+    # instead of writing this:
+    form_for @user do |f|
+      f.label :first_name
+      f.text_field :first_name
+      f.label :last_name
+      f.text_field :last_name
+    end
+
+    # using formal, you can do this:
+    form_for @user do |f|
+      f.input_for :first_name
+      f.input_for :last_name
     end
 
 input_for :field, options={}
 ----------------------------
-generates a text_field for an object
+generates a text_field for an object with a label, takes the same options as text_field,
+pass in the label option to change it.
 
 EX:
       
@@ -29,23 +46,38 @@ EX:
     
     # change the label
     f.input_for :first_name, :label => "Your First Name"
+    
+    # set a default one line text_field
+    f.input_for :first_name, :default => "Please enter in your name"
+
+    # make more changes to the label, :val is the value of the label
+    f.input_for :first_name, :label => {:val => "Please enter in your name", :class => "something"}
       
 password_for :field, options={}      
 -------------------------------
-generates a password_field for an object
+generates a password_field for an object with a label, works just like input_for with the same exact options.
 
 EX:
 
     f.password_for :password
     
+    # change the label
+    f.password_for :password, :label => {:val => "Enter password", :class => "pass"}
 
-radio_for :field, options={}
+radio_for :field,'value', options={}
 ----------------------------
-generates a radio_button 
+generates a radio_button with a label
 
 EX: 
-
+    
+    # default setup
     f.radio_for :option
+    
+    # change the default label
+    f.radio_for :option, "Select Option"
+
+    # change the label
+    f.radio_for :option, "Select your option", :label => {:class => "options"}
       
       
 checkbox_for :field, options={}      
@@ -53,7 +85,14 @@ checkbox_for :field, options={}
 generates a checkbox
 
 EX:
-
+    
+    # default setup
     f.checkbox_for :option
+
+    # change the label
+    f.checkbox_for :option, "Select your option"
+
+    # change the label
+    f.checkbox_for :option, "Select your option", :label => {:class => "options"}
 
 Copyright (c) 2009 [Vann Ek], released under the MIT license

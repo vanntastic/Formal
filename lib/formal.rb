@@ -19,6 +19,7 @@ module FormalBuilder
   #    f.input_for :first_name, :label => {:val => "My first name", :class => "big"}
   #    f.input_for :first_name, :label => {:val => "My first name", 
   #                :class => "big"}, :class => "text_field_class"
+  # 
   def input_for(method, options={})
     options[:class] ||= ""
     content = build_tags(method,options)
