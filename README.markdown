@@ -8,8 +8,23 @@ Writing forms suck, it needs to be more easier, and more... formal, formal is a 
 - common sense abstractions like wrapping inputs with labels or giving you toggle values
 - doesn't constrain you to a esoteric form building dsl, so you still have the ability to use this with the other standard rails form helpers like text_field, text_area, etc.
 - some nice view helpers to do things like zebra striping 
+- includes the [jquery.validate](http://docs.jquery.com/Plugins/Validation) plugin if you don't want to use active record validation.
 
 **WARNING : I just started this so it's still under intense development, fork or use at your own risk!**
+
+INSTALLATION
+============
+
+- Run:
+
+    ./script/plugin install http://github.com/vanntastic/Formal
+    rake formal:install
+
+- Add the following to your layout file (in the head) :
+
+    <%= include_formal %>
+    # if you want jquery.validate to be included (requires jquery):
+    <%= include_formal :validation => true %>
 
 USAGE
 =====

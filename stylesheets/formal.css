@@ -77,3 +77,54 @@ textarea{
 
 /* zebra stripes */
 .alt{background:#FFEDB8;}
+
+/*** Standard AR Error message styles ***/
+
+div.errorExplanation{
+  border:1px solid #FF0000;
+  background-color:#fbfbfa;
+  padding: 10px;
+  margin:10px;
+}
+
+div.errorExplanation ul{
+  padding: 5px 30px;
+  list-style: square outside;
+}
+
+
+div.errorExplanation h2, div#errorExplanation h2{
+  background-color:#FF0000;
+  color:#fff;
+  margin:-10px -10px 10px -10px;
+  padding:3px;
+  color:#fff;
+  font-size:14px;
+}
+
+div.errorExplanation p{
+  margin:5px;
+}
+
+div.errorExplanation ul{
+  font-size:.75em;
+}
+
+div.fieldWithErrors{
+  border-left:5px solid #FF0000;
+}
+  
+/*** jquery.validate error styles ***/
+
+label.error{
+  padding-top:3px;
+  padding-left:5px;
+  font-weight:bold;
+  font-size: .85em;
+  color:#E82719;
+  text-decoration: underline;
+}
+
+input.error{
+  border: 1px solid #E82719;
+}

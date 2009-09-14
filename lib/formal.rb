@@ -146,6 +146,26 @@ module FormalBuilder
 end
 
 module FormalViewHelpers
+  
+  # includes all the files needed for formal
+  # EX : 
+  # include_formal # => default setup, just css files
+  # include_formal :validation => true # => includes jquery validate
+  def include_formal(options={})
+    options[:validation] ||= false
+    
+    content = stylesheet_link_tag("formal", :cache => "formal")
+    
+    if options[:validation]
+      content << javascript_include_tag("jquery.validate/jquery.metadata.js",
+                                        "jquery.validate/jquery.form.js",
+                                        "jquery.validate/jquery.validate.min.js",
+                                        "jquery.validate/additional-methods.js",
+                                        :cache => "jquery-validate")
+    end
+    content
+  end
+  
   # some view standard helpers
   
   # this will generate the html for alternating rows
