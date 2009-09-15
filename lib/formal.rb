@@ -12,6 +12,8 @@ module FormalBuilder
   # EX : 
   #     
   #    f.input_for :first_name
+  #    # make sure that it's required
+  #    f.input_for :first_name, :required => true
   #    # say you wanted to default your text_field
   #    f.input_for :first_name, :default => "Enter your first name"
   #    f.input_for :first_name, :hint => "Enter your first name"
@@ -110,6 +112,7 @@ module FormalBuilder
   protected
     # the common method that will be called to build the preceding tags
     def build_tags(method, options)
+      options[:label] << " *" if options[:required]
       content = setup_label_for(method, options[:label]) 
       content = add_hint_to(options[:hint],content)
       return content
@@ -138,9 +141,13 @@ module FormalBuilder
     
     # gets rid of non html options and sets sensible defaults
     def sanitize_opts(options)
+      options[:required] ||= false
+      options[:class] ||= ""
       options[:value] = options[:default] unless options[:default].nil?
-      opts = %w(label hint default checked unchecked)
-      opts.each {|o| options.delete o}
+      # add required class if require is passed as true
+      options[:class] = options[:required] ? (options[:class] << " required") : options[:class]
+      opts = %w(label hint default checked unchecked required)
+      opts.each {|o| options.delete o.to_sym}
       return options
     end
 end
@@ -161,6 +168,7 @@ module FormalViewHelpers
                                         "jquery.validate/jquery.form.js",
                                         "jquery.validate/jquery.validate.min.js",
                                         "jquery.validate/additional-methods.js",
+                                        "jquery.validate/load-validations.js",
                                         :cache => "jquery-validate")
     end
     content
