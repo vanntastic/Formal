@@ -23,7 +23,6 @@ module FormalBuilder
   #                :class => "big"}, :class => "text_field_class"
   # 
   def input_for(method, options={})
-    options[:class] ||= ""
     content = build_tags(method,options)
     if options[:default].nil?
       return content << @template.text_field(@object_name, method, 
@@ -112,6 +111,8 @@ module FormalBuilder
   protected
     # the common method that will be called to build the preceding tags
     def build_tags(method, options)
+      options[:class] ||= ""
+      options[:label] ||= method.to_s.humanize
       options[:label] << " *" if options[:required]
       content = setup_label_for(method, options[:label]) 
       content = add_hint_to(options[:hint],content)
