@@ -17,14 +17,14 @@ INSTALLATION
 
 - Run:
 
-      ./script/plugin install http://github.com/vanntastic/Formal
-      rake formal:install
+        ./script/plugin install http://github.com/vanntastic/Formal
+        rake formal:install
 
 - Add the following to your layout file (in the head) :
 
-      <%= include_formal %>
-      // if you want jquery.validate to be included (requires jquery):
-      <%= include_formal :validation => true %>
+        <%= include_formal %>
+        // if you want jquery.validate to be included (requires jquery):
+        <%= include_formal :validation => true %>
 
 USAGE
 =====
