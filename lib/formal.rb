@@ -175,6 +175,16 @@ module FormalViewHelpers
     content
   end
   
+  # wrap any features still in development with this method, remove when ready for production
+  # EX : still_in_development { my_new_feature }
+  # OR
+  #   still_in_development do
+  #     some cool feature that you are working on... 
+  #   end
+  def still_in_development(&blk)
+    yield unless Rails.env == "production"
+  end
+  
   # some view standard helpers
   
   # this will generate the html for alternating rows

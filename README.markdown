@@ -77,10 +77,10 @@ generates a text_area field for an object with a label, takes same options as in
 
 EX:
 
-  f.text_area_for :comments
+    f.text_area_for :comments
   
-  # make the field required
-  f.text_area_for :comments, :required => true
+    # make the field required
+    f.text_area_for :comments, :required => true
     
 password_for :field, options={}      
 -------------------------------
@@ -156,6 +156,15 @@ EX:
   # the row class defaults to using 'alt' or 'reg', but you can change it
   stripes :row_classes => ["none","hi-lite"] do
     # your data
+  end
+
+still_in_development &blk
+-------------------------
+Protects a block of code from running in production, useful if you are working on a feature which
+isn't ready for production yet.
+
+  still_in_development do
+    # code for the best feature ever
   end
 
 Copyright (c) 2009 [Vann Ek], released under the MIT license
