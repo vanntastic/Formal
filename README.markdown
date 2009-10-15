@@ -124,6 +124,56 @@ EX:
     # change the label
     <%= f.checkbox_for :option, "Select your option", :label => {:class => "options"} %>
 
+
+select_for method, choices, options={}
+--------------------------------------
+generates a select tag, takes same options as select
+
+EX:
+
+    # default setup
+    <%= f.select_for :gender %>
+
+    # pass in some options
+    <%= f.select_for :gender, %w(Male, Female) %>
+
+    # change the label and make it required
+    <%= f.select_for :gender, %w(Male, Female), :required => true, :label => {:val => "Select a gender"} 
+
+
+date_select_for method, options={}, html_options={}
+---------------------------------------------------
+generates a date select, takes same options as date_select
+
+EX:
+
+    # default setup
+    <%= f.date_select_for :dob %>
+    
+    # change the order of the date lists and the label
+    <%= f.date_select_for :dob, :order => [:month,:day,:year], 
+        :label => {:val => "Date of Birth"} %>
+    
+    # make it required and change the label
+    <%= f.date_select_for :dob, :required => true, :label => {:val => "Date of Birth"} %>    
+    
+
+datetime_select_for method, options={}, html_options={}    
+-------------------------------------------------------
+generates a datetime select, takes the same options as datetime_select
+
+EX:
+
+    # default setup
+    <%= f.datetime_select_for :appt %>
+    
+    # make it required
+    <%= f.datetime_select_for :appt, :required => true %>
+    
+    # make it required and change the label
+    <%= f.datetime_select_for :appt, :required => true, 
+        :label => {:val => "Select Appointment"} %>
+
 zebra_stripes options={}, &blk
 ------------------------------
 Zebra stripes allows you to wrap data output (like records and such) in zebra stripes, make sure you set the **'reg' or 'alt'** class in your stylesheet so that it gets a proper background color:

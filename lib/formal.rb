@@ -95,6 +95,47 @@ module FormalBuilder
   
   # EX:
   # 
+  # f.select_for :gender
+  # f.select_for :gender, ["Male","Female"]
+  # f.select_for :gender, ["Male","Female"], :label => {:val => "Select Gender"}
+  # 
+  def select_for(method,choices,options={})
+    content = build_tags(method,options)
+    options.delete :label
+    content << @template.select(@object_name,method,choices,options)
+  end
+  
+  # EX:
+  # 
+  # f.date_select_for :dob
+  # f.date_select_for :dob, :order => [:month,:day,:year], :label => {:val => "Date of Birth"}
+  # f.date_select_for :dob, :required => true, :label => {:val => "Date of Birth"}
+  # 
+  def date_select_for(method,options={},html_options={})
+    content = build_tags(method,options)
+    html_options[:class] = html_options[:class].nil? ? "inline" : (html_options[:class] << " inline")
+    options.delete :label
+    content << @template.date_select(@object_name,method,options,html_options)
+  end
+  
+  # EX:
+  # 
+  # f.datetime_select_for :appt
+  # f.datetime_select_for :appt
+  # f.datetime_select_for :appt, :order => [:month,:day,:year], 
+  #                              :label => {:val => "Date of Birth"}
+  # f.datetime_select_for :appt, :required => true, :label => {:val => "Date of Birth"}
+  #
+  def datetime_select_for(method,options={},html_options={})
+    content = build_tags(method,options)
+    html_options[:class] = html_options[:class].nil? ? "inline" : (html_options[:class] << " inline")
+    options.delete :label
+    content << @template.datetime_select(@object_name,method,options,html_options)
+  end
+  
+  
+  # EX:
+  # 
   # f.label_for :first_name
   # f.label_for :first_name, "My First Name"
   # f.label_for :first_name, :val => "My First name", :class => "big"
@@ -109,7 +150,7 @@ module FormalBuilder
   end
   
   protected
-    # the common method that will be called to build the preceding tags
+    # the common method that will be called to build the preceding tags before the field
     def build_tags(method, options)
       options[:class] ||= ""
       options[:label] ||= method.to_s.humanize

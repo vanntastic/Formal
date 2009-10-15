@@ -16,8 +16,9 @@ span.hint{
   font-size: 10px;
 }
 
-label.inline{
+label.inline, input.inline, select.inline{
   display: inline;
+  width: auto;
 }
 
 input[type="radio"], input[type="checkbox"]{
