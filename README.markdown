@@ -163,8 +163,8 @@ still_in_development &blk
 Protects a block of code from running in production, useful if you are working on a feature which
 isn't ready for production yet.
 
-  <% still_in_development do -%>
-    # code for the best feature ever
-  <% end -%>
+    <% still_in_development do -%>
+      # code for the best feature ever
+    <% end -%>
 
 Copyright (c) 2009 [Vann Ek], released under the MIT license
