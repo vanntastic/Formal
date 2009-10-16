@@ -83,7 +83,7 @@ module FormalBuilder
     checked = (options[:checked] ||= "1")
     unchecked = (options[:unchecked] ||= "0")
     options[:label] = setup_option_label(options[:label],val)
-    lbl = setup_label_for(method, options[:label])
+    lbl = build_tags(method,options)
     options.delete :label
     @template.check_box(@object_name,method,options,checked,unchecked) << lbl
   end
