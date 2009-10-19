@@ -56,6 +56,16 @@ module FormalBuilder
   
   # EX:
   # 
+  # f.file_field_for :photo
+  # f.file_field_for :photo, :label => "Picture"
+  # 
+  def file_field_for(method,options={})
+    content = build_tags(method,options)
+    content << @template.file_field(@object_name,method,sanitize_opts(options))
+  end
+  
+  # EX:
+  # 
   # f.radio_for :option, "checked"
   # f.radio_for :option, "Select Option", :label => {:class => "special"}
   def radio_for(method, val, options={})

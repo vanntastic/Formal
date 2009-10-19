@@ -92,6 +92,18 @@ EX:
     
     # change the label
     <%= f.password_for :password, :label => {:val => "Enter password", :class => "pass"} %>
+    
+file_field_for :field, options={}      
+-------------------------------
+generates a file_field for an object with a label, works just like input_for with the same exact options.
+
+EX:
+
+    <%= f.file_field :photo %>
+
+    # change the label
+    <%= f.file_field :photo, :label => "Picture" %>    
+    
 
 radio_for :field,'value', options={}
 ----------------------------
