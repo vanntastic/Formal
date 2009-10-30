@@ -68,8 +68,11 @@ module FormalBuilder
   # 
   # f.radio_for :option, "checked"
   # f.radio_for :option, "Select Option", :label => {:class => "special"}
+  # f.radio_for :option, "Select Option", :label => {:val => "Select something", 
+  #                                                 :class => "special"}
   def radio_for(method, val, options={})
     options[:label] = setup_option_label(options[:label],val)
+    options[:label].update(:for => "#{@object_name}_#{method.to_s.downcase}_#{val.to_s.downcase}")
     lbl = label_for(method,options[:label])
     options.delete :label
     
@@ -181,7 +184,12 @@ module FormalBuilder
          lbl = {:val => val,:value => val,:class => "inline"}
        else
          lbl_class = lbl[:class].nil? ? "inline" : (lbl[:class] << " inline")
-         lbl.update(:class => lbl_class, :val => val, :value => val)
+         # allows you to pass lbl => "String"
+         if lbl.is_a?(String)
+           lbl = {:class => lbl_class,:val => lbl,:value => lbl}
+         elsif lbl.is_a?(Hash)
+           lbl.update(:class => lbl_class, :val => lbl[:val], :value => val)
+         end
        end
        return lbl
     end
